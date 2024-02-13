@@ -1,4 +1,6 @@
 import streamlit as st
+import subprocess
+import os
 from ur_audio_sub import subGen_path, read_txt
 
 def generate_subtitle(mp3_file_path):
