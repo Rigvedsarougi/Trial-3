@@ -2,3 +2,4 @@ whisper @ git+https://github.com/openai/whisper.git
 streamlit
 pydub
 pandas
+ur_audio_sub
