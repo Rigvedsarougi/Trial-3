@@ -1,37 +1,22 @@
 import streamlit as st
-import subprocess
-import os
-from ur_audio_sub import subGen_path, read_txt
-
-def generate_subtitle(mp3_file_path):
-    # Set up the subtitle file path
-    subtitle_file_path = mp3_file_path.replace('.mp3', '.txt')
-
-    # Generate subtitle
-    subGen_path(mp3_file_path)
-
-    # Read subtitle content
-    subtitle_content = read_txt(subtitle_file_path)
-
-    return subtitle_content
+from ur_audio_sub import generate_subtitle
 
 def main():
     st.title("Audio Subtitle Generator")
 
-    # File upload
-    mp3_file = st.file_uploader("Upload an MP3 file")
+    # File upload section
+    st.subheader("Upload Audio File")
+    uploaded_file = st.file_uploader("Choose an audio file", type=["mp3"])
 
-    if mp3_file is not None:
-        # Save the uploaded file to a temporary location
-        with open("temp.mp3", "wb") as f:
-            f.write(mp3_file.getvalue())
+    if uploaded_file is not None:
+        st.audio(uploaded_file, format='audio/mp3', start_time=0)
 
         # Generate subtitle
-        subtitle_content = generate_subtitle("temp.mp3")
+        subtitle_content = generate_subtitle(uploaded_file)
 
         # Display subtitle content
-        st.header("Generated Subtitle:")
-        st.text(subtitle_content)
+        st.subheader("Generated Subtitle:")
+        st.write(subtitle_content)
 
 if __name__ == "__main__":
     main()
