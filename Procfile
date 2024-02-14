@@ -1,1 +1,1 @@
-web: streamlit run app.py
+web: streamlit run speech_to_text.py
